@@ -3,6 +3,8 @@ package ArrayBasedList;
 
 public class NumList extends ArrayList {
     
+    int search;
+    
     public NumList(){
         this.listSize = 0;
         this.numList = null;
@@ -68,9 +70,9 @@ public class NumList extends ArrayList {
     public void print(){
         for(int x=0;x<this.listSize;x++){
             if(this.numList[x] == -1){
-                System.out.print("_ ");
+                System.out.println("_ ");
             }else{
-                System.out.print(this.numList[x] + " ");
+                System.out.println(this.numList[x] + " ");
             }
             
         }
@@ -80,7 +82,7 @@ public class NumList extends ArrayList {
     public void retrieveItem(int index) {
         if (index < this.listSize) {
             int num = this.numList[index];
-            System.out.println(num);
+            System.out.println("\nThe element is: " +num);
         }
         else {
             System.out.println("Number must be less than " + this.listSize);
@@ -91,7 +93,8 @@ public class NumList extends ArrayList {
     public boolean searchItem(int fromArr) {
         for (int index = 0;index < this.numList.length;index++) {
             if (this.numList[index] == fromArr) {
-                System.out.println(fromArr + " is found on the array list.");
+                System.out.println("\n" + fromArr + " is found on the array list.");
+                this.search = this.numList[index];
                 return true;
             }
         }
@@ -102,8 +105,12 @@ public class NumList extends ArrayList {
     @Override
     public void replaceItem(int fromArr, int toReplace) {
         if (searchItem(fromArr) == true) {
-            this.numList[fromArr] = toReplace;
-            System.out.println("Therefore, changed to " + toReplace + ".");
+            for (int index = 0; index < this.numList.length; index ++) {
+                if (this.numList[index] == this.search) {
+                    this.numList[index] = toReplace;
+                    System.out.println("Therefore, changed to " + toReplace + ".");
+                }
+            }     
         }
         else {
             System.out.println(fromArr + " is not on the array list. Therefore, you cannot replace it." );
