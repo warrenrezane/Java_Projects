@@ -101,10 +101,10 @@ public class NumList extends ArrayList {
         System.out.println(fromArr + " is not on the array list.");
         return false;
     }
-
+    
     @Override
     public void replaceItem(int fromArr, int toReplace) {
-        if (searchItem(fromArr) == true) {
+        if (searchItem(fromArr)) {
             for (int index = 0; index < this.numList.length; index ++) {
                 if (this.numList[index] == this.search) {
                     this.numList[index] = toReplace;
