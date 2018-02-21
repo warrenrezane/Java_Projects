@@ -46,6 +46,7 @@ public class LinkedList {
         if (head == null){
             return;
         }
+        
         while(cur != null && cur.data != key){
             cur = cur.next;
             prev = cur;
@@ -67,15 +68,14 @@ public class LinkedList {
             cur = cur.next;
             prev = cur;
         } 
+        
         prev.next = null;
-
     }
     
     public void printList() {
         Node temp = head;
-        
         while (temp != null) {
-            System.out.print(temp.data + " ");
+            System.out.print(temp.data + ", ");
             temp = temp.next;
         }
     }
