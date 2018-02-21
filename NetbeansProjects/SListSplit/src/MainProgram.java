@@ -14,7 +14,7 @@ public class MainProgram {
         LinkedList myList = new LinkedList();
         LinkedList otherList = new LinkedList();
         
-        System.out.println("Inserting 6 elements.....");
+        System.out.println("Inserting 10 elements.....");
         for (int i=0;i<10;i++) {
             myList.addLast((i+1));
         }

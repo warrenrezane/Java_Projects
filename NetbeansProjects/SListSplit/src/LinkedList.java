@@ -12,8 +12,6 @@ public class LinkedList {
     
     protected Node head;
     protected Node tail;
-    protected Node otherHead;
-    protected Node otherTail;
     
     public LinkedList() {
         head = null;
@@ -41,16 +39,13 @@ public class LinkedList {
     }
     
     public void splitAt(LinkedList otherList, int key) {
-
-        Node prev = null;        
+        Node prev = null;       
         Node cur = head;
         int NodeData;
               
         if (head == null){
             return;
         }
-        
-        //List 2 Prop
         while(cur != null && cur.data != key){
             cur = cur.next;
             prev = cur;
@@ -68,12 +63,12 @@ public class LinkedList {
         prev = null;
         cur = head;
         
-        //List 1 Prop
         while(cur != null && cur.data != key){
             cur = cur.next;
             prev = cur;
         } 
         prev.next = null;
+
     }
     
     public void printList() {
