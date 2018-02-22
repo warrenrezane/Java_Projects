@@ -38,10 +38,68 @@ public class LinkedList {
         }
     }
     
+    public void insertBefore(int item, int key) {
+        Node start = head;
+        Node current = start;
+        Node previous = null;
+        
+        if (start.equals(null)) {
+            return;
+        }
+        
+        if (start.data == key) {
+            addFirst(item);
+            return;
+        }
+        else {
+            while (start != null) {
+                while (current != null && current.data != key) {
+                    previous = current;
+                    current = current.next;
+                }
+            }
+
+            if (current != null) {
+                previous.next = new Node(item, current);
+            }
+        }
+    }
+    
+    public void insertAfter(int item, int key) {
+        Node start = head;
+        while (start != null) {
+            if (start != null && start.data != key) {
+                start = start.next;
+            }
+        }
+        if (start != null) {
+            start.next = new Node(item, start.next);
+        }
+    }
+    
+    public void remove(int item) {
+        Node prev = null;
+        Node cur = head;
+        while (cur != null) {
+            if (cur.data == item) {
+                if (prev == null) {
+                    head = cur.next;
+                }
+                else {
+                    prev.next = cur.next;
+                }
+            }
+            else {
+                prev = cur;
+            }
+            cur = cur.next;
+        }
+    }
+    
     public void splitAt(LinkedList otherList, int key) {
         Node prev = null;       
         Node cur = head;
-        int NodeData;
+        int NodeData = 0;
               
         if (head == null){
             return;
