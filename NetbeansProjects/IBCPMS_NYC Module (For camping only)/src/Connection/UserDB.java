@@ -43,9 +43,7 @@ public class UserDB {
             st.executeUpdate(query);
             result = true;
         } catch (Exception e){
-            if (e instanceof SQLException) {
-                setError(e.getMessage());
-            }
+            setError(e.getMessage());
             result = false;
         }
         finally {

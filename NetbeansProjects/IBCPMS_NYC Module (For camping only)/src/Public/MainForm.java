@@ -1077,16 +1077,18 @@ public class MainForm extends javax.swing.JFrame {
         }
         else {
             Contact campContact = new Contact(name,age,gender,churchName,churchPos,churchAdd,district,email,contact,pastorName,pastorContact,campsAttended,this.allergy);
-            UserDB udb = new UserDB();
-            boolean valid = udb.validate(campContact);
-            if (valid) {
-                JOptionPane.showMessageDialog(null, "Contact Information Successfully Added.", "IBCPMS " + this.version, INFORMATION_MESSAGE);
-                
-                clearAll();
-            }
-            else {
-                JOptionPane.showMessageDialog(null, "Error! \nPossible Errors: " + udb.getError(), "IBCPMS " + this.version, ERROR_MESSAGE);
-            }
+//            UserDB udb = new UserDB();
+//            boolean valid = udb.validate(campContact);
+//            if (valid) {
+//                JOptionPane.showMessageDialog(null, "Contact Information Successfully Added.", "IBCPMS " + this.version, INFORMATION_MESSAGE);
+//                
+//                clearAll();
+//            }
+//            else {
+//                JOptionPane.showMessageDialog(null, "Error! \nPossible Errors: " + udb.getError(), "IBCPMS " + this.version, ERROR_MESSAGE);
+//            }
+            ProgressBarTest progressBarTest = new ProgressBarTest(campContact);
+            progressBarTest.setVisible(true);
         }
     }//GEN-LAST:event_btn_subActionPerformed
 

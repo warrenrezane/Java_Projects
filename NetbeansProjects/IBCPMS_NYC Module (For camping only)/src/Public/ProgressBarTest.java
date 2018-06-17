@@ -5,9 +5,13 @@
  */
 package Public;
 
+import Classes.Contact;
 import Connection.DatabaseConnection;
+import Connection.UserDB;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.SwingWorker;
 
 /**
@@ -21,30 +25,50 @@ public class ProgressBarTest extends javax.swing.JFrame {
      */
     public DatabaseConnection dbcon;
     public Connection con;
-    private ProgressConnect connect;
+    //private ProgressConnect connect;
     
     public ProgressBarTest() {
         initComponents();
     }
-
-    class ProgressConnect extends SwingWorker<Void, Void> {
-        
-        @Override
-        public Void doInBackground() throws Exception {
-            prog_connect.setIndeterminate(true);
-            dbcon = new DatabaseConnection();
-            con = dbcon.getConnection();
-            return null;
-        }
-        
-        @Override
-        public void done() {
-            prog_connect.setIndeterminate(false);
-            JOptionPane.showMessageDialog(null, "Successfully Connected. ", "Progress Connect. ", JOptionPane.INFORMATION_MESSAGE);
-            prog_connect.setVisible(false);
-            System.exit(0);
-        }
+    
+    public ProgressBarTest(Contact campContact) {
+        initComponents();
+        SwingWorker sw = new SwingWorker() {
+            @Override
+            protected Void doInBackground() {
+                prog_connect.setIndeterminate(true);
+                UserDB udb = new UserDB();
+                boolean valid = udb.validate(campContact);
+                if (valid) {
+                    JOptionPane.showMessageDialog(null, "Successfully registered. ");
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Error! \nPossible errors: " + udb.getError());
+                }
+                return null;
+            }
+            
+            @Override
+            protected void done() {
+                prog_connect.setIndeterminate(false);
+                setVisible(false);
+            }
+        };
+        sw.execute();
     }
+
+//    class ProgressConnect extends SwingWorker<Void, Void> {
+//        
+//        @Override
+//        public Void doInBackground() throws Exception {
+//            return null;
+//        }
+//        
+//        @Override
+//        public void done() {
+//            
+//        }
+//    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,10 +79,24 @@ public class ProgressBarTest extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         prog_connect = new javax.swing.JProgressBar();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().add(prog_connect, java.awt.BorderLayout.CENTER);
+        setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        prog_connect.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel1.add(prog_connect, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 240, 20));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel1.setText("Submitting...");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 80));
 
         pack();
         setLocationRelativeTo(null);
@@ -101,6 +139,8 @@ public class ProgressBarTest extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar prog_connect;
     // End of variables declaration//GEN-END:variables
 }
