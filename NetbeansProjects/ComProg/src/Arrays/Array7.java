@@ -19,14 +19,30 @@ public class Array7 {
         int[][] m = new int[row][col];
         
         for (int i=0;i<row;i++) {
-            System.out.print("Enter value for row " + (i+1) + ": (Separate by space) ");
+//            System.out.print("Enter value for row " + (i+1) + ": (Separate by space) ");
             for (int j=0;j<col;j++) {
-                m[i][j] = war.nextInt();
+//                m[i][j] = war.nextInt();
+                int rand = (int) Math.floor(Math.random() * 10);
+                m[i][j] = rand;
             }
         }
         
+        for (int[] i : m) {
+            for (int j : i) {
+                System.out.print(j + "\t");
+            }
+            System.out.println("");
+        }
+        
+        
         System.out.println("Determinant of 3x3: " + getDeterminant(m));
     }
+    
+    static void sort(int[][] m) {
+        
+    }
+    
+    
     
     static int getDeterminant(int[][] m) {
         int a = m[0][0] * (((m[1][1]) * (m[2][2])) - ((m[1][2]) * (m[2][1]))); // a(ei-fh)

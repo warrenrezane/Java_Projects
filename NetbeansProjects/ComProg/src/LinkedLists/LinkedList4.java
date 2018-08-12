@@ -20,11 +20,11 @@ public class LinkedList4 {
         myList.add(2);
         myList.add(6);
         
-        myList.printList();
+        //myList.printList();
         System.out.println("");
 //        myList.sort();
 //        myList.printSorted();
-        myList.sortList(sortedList);
-        sortedList.printList();
+        //myList.sortList(sortedList);
+        //sortedList.printList();
     }
 }

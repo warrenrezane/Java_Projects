@@ -41,8 +41,7 @@ public class NumList extends ArrayList {
             this.itemCount++;
         }else{
             System.out.println("\nThe list is full.");
-        }
-        
+        } 
     }
     
     @Override

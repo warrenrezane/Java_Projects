@@ -13,6 +13,7 @@ public class LinkedListClass {
 
     Node head;
     Node tail;
+    int size;
     
     public LinkedListClass() {
         head = null;
@@ -23,10 +24,32 @@ public class LinkedListClass {
         if (head == null) {
             head = new Node(data, head);
             tail = head;
+            size++;
         }
         else {
             head = new Node(data, head);
+            size++;
         }
+    }
+    
+    public void addFirstLast(int fdata, int ldata) {
+        if (head == null && tail == null) {
+            addFirst(fdata);
+            addLast(ldata);
+        }
+        else {
+            head = new Node(fdata, head);
+            tail.next = new Node(ldata, null);
+            tail = tail.next;
+        }
+    }
+    
+    public void getFirst() {
+        System.out.print("First: " + head.data);
+    }
+    
+    public void getLast() {
+        System.out.print("Last: " + tail.data);
     }
     
     public void addLast(int data) {
@@ -36,11 +59,60 @@ public class LinkedListClass {
         else {
             tail.next = new Node(data, null);
             tail = tail.next;
+            size++;
         }
     }
     
     public void add(int data) {
         addLast(data);
+    }
+    
+    // Same functionality if the method below
+//    public void sortList() {
+//        Node i;
+//        Node j = head.next;
+//        
+//        if (head == null) {
+//            return;
+//        }
+//        
+//        do {
+//            i = head;
+//            while (i != j) {
+//                if (i.data > j.data) {
+//                    swapNode(i, j);
+//                }
+//                i = i.next;
+//            }
+//            j = j.next;
+//        } while (j != null);
+//    }
+    
+    // Shorter version of bubble sort
+    public void sortList() {
+        Node i;
+        Node j = head.next;
+        
+        while (j != null) {
+            i = head;
+            while (i != null) {
+                if (i.data > j.data) {
+                    swapNode(i, j);
+                }
+                i = i.next;
+            }
+            j = j.next;
+        }
+    }
+    
+    public void swapNode(Node slow, Node fast) {
+        int data = slow.data;
+        slow.data = fast.data;
+        fast.data = data;
+    }
+    
+    public int getSize() {
+        return size;
     }
     
     public void printList() {
@@ -53,56 +125,51 @@ public class LinkedListClass {
         }
     }
 
-    
-//    public void sort() {
-//        Node cur = head;
-//        sorted = null;
-//        Node temp = sorted;
-//
-//        while (cur != null) {
-//            Node next = cur.next;
-//           
-//            if (sorted == null || sorted.data >= cur.data) {
-//                cur.next = sorted;
-//                sorted = cur;
-//            }
-//            else {
-//                while (temp.next != null && temp.next.data < cur.data) {
-//                    temp = temp.next;
-//                }
-//                cur.next = temp.next;
-//                temp.next = cur;
-//            }
-// 
-//            cur = next;
-//        }
-//        sorted = cur;
-//    }
-    
-    public void sortList(LinkedListClass sortedList) {
+    public void remove(int data) {
         Node cur = head;
-        Node adv = cur.next;
+        Node prev = null;
         
-        try {
-            while (cur != null) {
-                if (cur.data > adv.data) {
-                    sortedList.add(adv.data);
-                }
-                else if (cur.data < adv.data) {
-                    sortedList.add(cur.data);
-                }
-                cur = cur.next;
-                adv = adv.next;
-            }
-        } catch (NullPointerException e) {
-            e.getMessage();
+        if (head == null) {
+            return;
         }
         
+        while (cur != null) {
+            if (cur.data == data) {
+                if (prev == null) {
+                    head = cur.next;
+                }
+                else {
+                    prev.next = cur.next;
+                }
+            }
+            else {
+                prev = cur;
+            }
+            cur = cur.next;
+        }
     }
     
+    public void reverseNode() {
+        Node cur = head;
+        Node reversedHead = null;
+        Node reversedTail = null;
+        
+        while (cur != null) {
+            if (reversedHead == null) {
+                reversedHead = new Node(cur.data, reversedHead);
+                reversedTail = reversedHead;
+            }
+            else {
+                reversedHead = new Node(cur.data, reversedHead);
+            }
+            cur = cur.next;
+        }
+        
+        head = reversedHead;
+        tail = reversedTail;
+    }
     
-    
-    private class Node {
+    public class Node {
         int data;
         Node next;
 
